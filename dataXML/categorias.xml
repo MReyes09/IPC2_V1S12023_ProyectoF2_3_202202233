@@ -1,0 +1,66 @@
+<categorias>
+   <categoria>
+      <nombre>Acción</nombre>
+      <peliculas>
+         <pelicula>
+            <titulo>Avengers: Endgame</titulo>
+            <director>Joe Russo, Anthony Russo</director>
+            <anio>2019</anio>
+            <fecha>2023-06-05</fecha>
+            <hora>18:30</hora>
+            <imagen>https://images.wallpapersden.com/image/download/2019-avengers-endgame-movie_a2loaGaUmZqaraWkpJRmbmllrWdoZ2U.jpg</imagen>
+            <precio>42</precio>
+         </pelicula>
+         <pelicula>
+            <titulo>John Wick</titulo>
+            <director>Chad Stahelski</director>
+            <anio>2014</anio>
+            <fecha>2023-06-06</fecha>
+            <hora>20:00</hora>
+            <imagen>https://image.tmdb.org/t/p/original/21D03cBlKO71TIUnZjae0QkDFKU.jpg</imagen>
+            <precio>45</precio>
+         </pelicula>
+         <pelicula>
+            <titulo>Misión Imposible: Fallout</titulo>
+            <director>Christopher McQuarrie</director>
+            <anio>2018</anio>
+            <fecha>2023-06-07</fecha>
+            <hora>19:15</hora>
+            <imagen>https://pixelz.cc/wp-content/uploads/2018/07/mission-impossible-fallout-ethan-hunt-tom-cruise-uhd-4k-wallpaper.jpg</imagen>
+            <precio>55</precio>
+         </pelicula>
+      </peliculas>
+   </categoria>
+   <categoria>
+      <nombre>Comedia</nombre>
+      <peliculas>
+         <pelicula>
+            <titulo>Deadpool</titulo>
+            <director>Tim Miller</director>
+            <anio>2016</anio>
+            <fecha>2023-06-05</fecha>
+            <hora>20:30</hora>
+            <imagen>https://3.bp.blogspot.com/-vRcHEAIXtGE/Vut0ph5OG-I/AAAAAAAAB0k/Be_1mMk8dYcz9_2AOtq8YZ5_Ugxk1JtaQ/s320/tumblr_nskkwlHjZc1qd9jlto1_1280.png</imagen>
+            <precio>65</precio>
+         </pelicula>
+         <pelicula>
+            <titulo>Superbad</titulo>
+            <director>Greg Mottola</director>
+            <anio>2007</anio>
+            <fecha>2023-06-06</fecha>
+            <imagen>http://image.tmdb.org/t/p/w500/ek8e8txUyUwd2BNqj6lFEerJfbq.jpg</imagen>
+            <hora>21:00</hora>
+            <precio>42</precio>
+         </pelicula>
+         <pelicula>
+            <titulo>Bridesmaids</titulo>
+            <director>Paul Feig</director>
+            <anio>2011</anio>
+            <fecha>2023-06-07</fecha>
+            <hora>20:15</hora>
+            <imagen>https://wallpapercave.com/wp/wp5268565.jpg</imagen>
+            <precio>42</precio>
+         </pelicula>
+      </peliculas>
+   </categoria>
+</categorias>
