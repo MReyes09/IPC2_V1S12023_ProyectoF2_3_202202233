@@ -53,9 +53,8 @@ class ListaUser:
         while actual is not None:
             usuario: Usuario = actual.dato
             if usuario.get_correo() == correo_Rec and usuario.get_contrasena() == contrasena_Rec:
-                global userLoged
-                userLoged = usuario
-                return usuario
+                self.userLoged = usuario
+                return self.userLoged
             actual = actual.siguiente
         return None
     
@@ -70,5 +69,4 @@ class ListaUser:
 
     def get_UserLoged(self):
 
-        global userLoged
-        return userLoged
+        return self.userLoged
