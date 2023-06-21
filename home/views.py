@@ -2,14 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from gestionar_usuarios.estructura_lista.listaUsuario import ListaUser
-from gestionar_usuarios.views import getListaUsers
+from gestionar_usuarios.views import getListaUsers, setListaUsers
 from gestionar_categorias.views import getListaCategoria
 from gestionar_categorias.estructura_lista.categoriaCotroller import categoriaController
 
 # Create your views here.
 # https://mdbootstrap.com/docs/standard/forms/overview/ CSS CHILERo
 # https://bootsnipp.com/forms
-global listaCategorias
 listaCategorias = getListaCategoria()
 categoriaControl = categoriaController()
 
@@ -17,6 +16,8 @@ listaUsuarios: ListaUser = ListaUser()
 listaUsuarios = getListaUsers()
 
 def Home(request):
+    global listaCategorias
+    
     if request.method == 'POST':
 
         nombre:str = request.POST.get('nombre')
@@ -26,11 +27,16 @@ def Home(request):
         contrasena:str = request.POST.get('contrasena')
 
         if nombre == None:
-
             usuario = listaUsuarios.Iniciar_Sesion(correo, contrasena)
             if usuario:
-                messages.success(request, 'Sesión iniciada correctamente!!!')
-                return redirect('userHome')
+                if usuario.get_rol() == "cliente":
+                    messages.success(request, 'Sesión iniciada correctamente!!!')
+                    setListaUsers(listaUsuarios)
+                    return redirect('userHome')
+                elif usuario.get_rol() == "administrador":
+                    messages.success(request, 'Sesión iniciada correctamente!!!')
+                    setListaUsers(listaUsuarios)
+                    return redirect('userHome')
             else:
                 messages.warning(request, 'No se encontró ninguna coincidencia.')
 
@@ -38,6 +44,14 @@ def Home(request):
 
             rol:str = "cliente"
             listaUsuarios.Registrarse(rol, nombre, apellido, telefono, correo, contrasena)
+            setListaUsers(listaUsuarios)
             listaUsuarios.Listar_Usuarios()
             messages.success(request, 'Se ha registrado el usuario con éxito')
-    return render(request, "Home.html", {'lista_Categorias': listaCategorias})
+
+    elif request.method == 'GET' and 'categoria' in request.GET:
+
+        categoria_seleccionada:str = request.GET.get('categoria')
+        return render(request, "Home.html", {'lista_Categorias': listaCategorias, 'categoria_Seleccionada': categoria_seleccionada})
+    
+    categoria_seleccionada = "General"
+    return render(request, "Home.html", {'lista_Categorias': listaCategorias, 'categoria_Seleccionada': categoria_seleccionada})
