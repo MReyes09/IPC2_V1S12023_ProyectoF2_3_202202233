@@ -17,7 +17,6 @@ listaUsuarios: ListaUser = ListaUser()
 listaUsuarios = getListaUsers()
 
 def Home(request):
-
     if request.method == 'POST':
 
         nombre:str = request.POST.get('nombre')
@@ -41,5 +40,4 @@ def Home(request):
             listaUsuarios.Registrarse(rol, nombre, apellido, telefono, correo, contrasena)
             listaUsuarios.Listar_Usuarios()
             messages.success(request, 'Se ha registrado el usuario con éxito')
-
-    return render(request, "Home.html", {'lista_Categoria:': listaCategorias})
+    return render(request, "Home.html", {'lista_Categorias': listaCategorias})

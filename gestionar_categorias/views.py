@@ -13,5 +13,4 @@ def getListaCategoria() -> []:
         return lista_Categorias
     else:
         lista_Categorias = categoriaControl.CargarXML_Category()
-
-    return lista_Categorias
+        return lista_Categorias

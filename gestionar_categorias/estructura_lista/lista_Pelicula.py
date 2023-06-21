@@ -52,3 +52,18 @@ class ListaPelicula:
             self.cola.siguiente = nuevo_Nodo
             self.cabeza.anterior = nuevo_Nodo
             self.cola = nuevo_Nodo
+
+
+    def loop(self):
+        actual = self.cabeza
+
+        while actual:
+            yield actual.pelicula
+            actual = actual.siguiente
+
+            if actual == self.cabeza:
+                break
+            
+
+    def __iter__(self):
+        return iter(self.loop())
