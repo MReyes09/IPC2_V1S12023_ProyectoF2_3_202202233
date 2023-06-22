@@ -93,60 +93,82 @@
                 <div class="contai_ner">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            {% for categoria in lista_Categorias %}
-                                <!-- Resto del contenido del bucle -->
+                            {% if categoria_Seleccionada == "Favoritos" %}
 
-                                {% if categoria_Seleccionada == "General" %}
+                                {% for pelicula in Mi_Fav %}
 
-                                  {% for pelicula in categoria.peliculas %}
-
-                                  <div class="carousel-item {% if forloop.parentloop.first and forloop.first %}active{% endif %}">
-                                      <img class="w-100 img" src="{{pelicula.get_imagen }}" alt="{{ pelicula.get_titulo }}">
-                                      <div class="carousel-caption d-none d-md-block">
-                                          <h5 class="p-3 mb-2 bg-dark text-white">{{ pelicula.get_titulo }}</h5>
-                                          
-                                      <form method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="titulo" value="{{ pelicula.get_titulo }}">
-                                        <input type="hidden" name="categoria" value="{{ categoria.nombreCa }}">
-                                        <button class="btn btn-primary" type="submit">Marcar como favorita</button>
-                                      </form>
-                                      </div>
-                                  </div>
-
-                                  {% endfor %}
-
-                                {% elif categoria.nombreCa == categoria_Seleccionada %}                                
-
-                                  {% for pelicula in categoria.peliculas %}
-                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">                                      
-                                        <img class="w-100 img" src="{{pelicula.get_imagen}}" alt="{{ pelicula.get_titulo }}">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h5 class="p-3 mb-2 bg-dark text-white">{{ pelicula.get_titulo }}</h5>
-                                            
-                                        <form method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="titulo" value="{{ pelicula.get_titulo }}">
-                                            <input type="hidden" name="categoria" value="{{ categoria.nombreCa }}">
-                                            <button class="btn btn-primary" type="submit">Marcar como favorita</button>
-                                          </form>
-                                        </div>
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img class="w-100 img" src="{{ pelicula.get_imagen }}" alt="{{ pelicula.get_titulo }}">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class="p-3 mb-2 bg-dark text-white">{{ pelicula.get_titulo }}</h5>
                                     </div>
-                                  
-                                  {% empty %}
-                                    <div class="carousel-item active">
-                                        <img class="w-100 imagenes" src="https://wallpapercave.com/wp/wp6339158.jpg" alt="No hay imagenes disponibles">
-                                    </div>
+                                </div>
 
-                                  {% endfor %}
-
-                                {% endif %}
-
-                            {% empty %}
+                                {% empty %}
                                 <div class="carousel-item active">
                                     <img class="w-100 imagenes" src="https://wallpapercave.com/wp/wp6339158.jpg" alt="No hay imagenes disponibles">
                                 </div>
-                            {% endfor %}
+
+                                {% endfor %}
+                            
+                            {% else %}
+
+                                {% for categoria in lista_Categorias %}
+                                <!-- Resto del contenido del bucle -->
+
+                                    {% if categoria_Seleccionada == "General" %}
+
+                                        {% for pelicula in categoria.peliculas %}
+
+                                        <div class="carousel-item {% if forloop.parentloop.first and forloop.first %}active{% endif %}">
+                                            <img class="w-100 img" src="{{ pelicula.get_imagen }}" alt="{{ pelicula.get_titulo }}">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5 class="p-3 mb-2 bg-dark text-white">{{ pelicula.get_titulo }}</h5>
+                                                
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="titulo" value="{{ pelicula.get_titulo }}">
+                                                <input type="hidden" name="categoria" value="{{ categoria.nombreCa }}">
+                                                <button class="btn btn-primary" type="submit">Marcar como favorita</button>
+                                            </form>
+                                            </div>
+                                        </div>
+
+                                        {% endfor %}
+
+                                    {% elif categoria.nombreCa == categoria_Seleccionada %}                                
+
+                                        {% for pelicula in categoria.peliculas %}
+                                            <div class="carousel-item {% if forloop.first %}active{% endif %}">                                      
+                                                <img class="w-100 img" src="{{pelicula.get_imagen}}" alt="{{ pelicula.get_titulo }}">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h5 class="p-3 mb-2 bg-dark text-white">{{ pelicula.get_titulo }}</h5>
+                                                    
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="titulo" value="{{ pelicula.get_titulo }}">
+                                                    <input type="hidden" name="categoria" value="{{ categoria.nombreCa }}">
+                                                    <button class="btn btn-primary" type="submit">Marcar como favorita</button>
+                                                </form>
+                                                </div>
+                                            </div>
+                                        
+                                        {% empty %}
+                                            <div class="carousel-item active">
+                                                <img class="w-100 imagenes" src="https://wallpapercave.com/wp/wp6339158.jpg" alt="No hay imagenes disponibles">
+                                            </div>
+
+                                        {% endfor %}
+
+                                    {% endif %}
+
+                                {% empty %}
+                                    <div class="carousel-item active">
+                                        <img class="w-100 imagenes" src="https://wallpapercave.com/wp/wp6339158.jpg" alt="No hay imagenes disponibles">
+                                    </div>
+                                {% endfor %}
+
+                                {% endif %}
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
