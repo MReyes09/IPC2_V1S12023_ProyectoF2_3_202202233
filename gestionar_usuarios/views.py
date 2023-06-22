@@ -3,6 +3,8 @@ from django.shortcuts import render
 from gestionar_usuarios.estructura_lista.listaUsuario import ListaUser
 from gestionar_usuarios.modelos.usuario import Usuario
 from gestionar_categorias.views import getListaCategoria
+from gestionar_categorias.estructura_lista.lista_Pelicula import ListaPelicula
+from gestionar_categorias.modelos.peliculas import Pelicula
 
 # Create your views here.
 lista: ListaUser = ListaUser()
@@ -36,11 +38,27 @@ def menuUserCliente(request):
     elif request.method == "POST" :
 
         titulo = request.POST.get('titulo')
-        categoria = request.POST.get('categoria')
+        nomCategoria = request.POST.get('categoria')
 
-        print(f"\n titulo: {titulo}\n categoria: {categoria}\n")
+        if userLoged.get_peliFav():
 
-        # return render(request, 'menuUser.html', {'lista_Categorias': listaCategorias, 'userLoged': userLoged, 'categoria_Seleccionada': categoria_seleccionada})
+            print("\nSE GUARDO LA PRIMERA PELI CON EXITO!!\n")
 
+        else: 
+
+            lista_Nueva: ListaPelicula = ListaPelicula()
+
+            for categoria in listaCategorias:
+
+                if categoria.get_NombreCa() == nomCategoria:
+
+                    lista_Peliculas:ListaPelicula = categoria.get_Peliculas()
+                    findedPelicula:Pelicula = lista_Peliculas.buscar_Pelicula(lista_Peliculas, titulo)
+                    lista_Nueva.add_Pelicula(findedPelicula)                    
+                    userLoged.set_peliFav(lista_Nueva)
+                    lista.actualizar_Usuario(userLoged)
+                    categoria_seleccionada = "General"
+                    return render(request, 'menuUser.html', {'lista_Categorias': listaCategorias, 'userLoged': userLoged, 'categoria_Seleccionada': categoria_seleccionada,})
+                
     categoria_seleccionada = "General"
     return render(request, 'menuUser.html', {'lista_Categorias': listaCategorias, 'userLoged': userLoged, 'categoria_Seleccionada': categoria_seleccionada,})

@@ -67,6 +67,24 @@ class ListaUser:
 
          print("El usuario se ha registrado exitosamente \n")
 
+    def actualizar_Usuario(self, userLoged: Usuario):
+
+        actual: NodoUser = self.cabeza
+
+        while actual is not None:
+
+            usuario: Usuario = actual.dato
+
+            if usuario.get_correo() == userLoged.get_correo():
+
+                actual.dato = userLoged
+                self.userLoged = userLoged
+                return userLoged
+
+            actual = actual.siguiente
+
+        print("No se encontro coincidencias")
+
     def get_UserLoged(self):
 
         return self.userLoged
