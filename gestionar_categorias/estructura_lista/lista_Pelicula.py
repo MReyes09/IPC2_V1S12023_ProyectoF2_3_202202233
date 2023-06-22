@@ -53,6 +53,28 @@ class ListaPelicula:
             self.cabeza.anterior = nuevo_Nodo
             self.cola = nuevo_Nodo
 
+    def buscar_Pelicula(self, listaDePelis, titulo):
+
+        actual: NodoPelicula = listaDePelis.cabeza
+
+        if actual is None:
+            print("No hay peliculas")
+            return
+        finded_Pelicula:Pelicula
+
+        while True:
+
+            getPelicula:Pelicula = actual.pelicula
+
+            if getPelicula.get_titulo() == titulo:
+
+                finded_Pelicula = getPelicula
+                return finded_Pelicula
+
+            elif listaDePelis.cabeza == actual.siguiente:
+                return None
+            else:
+                actual = actual.siguiente
 
     def loop(self):
         actual = self.cabeza
