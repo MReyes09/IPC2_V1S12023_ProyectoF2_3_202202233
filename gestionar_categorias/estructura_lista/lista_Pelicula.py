@@ -76,6 +76,32 @@ class ListaPelicula:
             else:
                 actual = actual.siguiente
 
+    def actualizar_Pelicula(self, titulo:str, pelicula_Ac):
+
+        actual: NodoPelicula = self.cabeza
+
+        if actual is None:
+            print("No hay peliculas")
+            return
+
+        while True:
+
+            getPelicula: Pelicula = actual.pelicula
+
+            if getPelicula.get_titulo() == titulo:
+
+                actual.pelicula = pelicula_Ac
+                while True:
+                    if actual.siguiente == self.cabeza:
+                        return actual
+                    else:
+                        actual = actual.siguiente
+
+            elif self.cabeza == actual.siguiente:
+                return None
+            else:
+                actual = actual.siguiente
+
     def loop(self):
         actual = self.cabeza
 
@@ -85,7 +111,36 @@ class ListaPelicula:
 
             if actual == self.cabeza:
                 break
-            
-
+    
     def __iter__(self):
         return iter(self.loop())
+    
+    def eliminar_Pelicula(self, titulo:str):
+
+        if self.cabeza is None:
+            print("No hay películas en la lista.")
+            return
+
+        actual = self.cabeza
+
+        while True:
+            if actual.pelicula.get_titulo() == titulo:
+                if actual == self.cabeza:
+                    # Caso especial: el nodo a eliminar es el nodo cabeza
+                    if actual == actual.siguiente:
+                        # Caso especial: solo hay un nodo en la lista
+                        self.cabeza = None
+                        self.cola = None
+                    else:
+                        self.cabeza = actual.siguiente
+                        self.cola.siguiente = self.cabeza
+                        self.cabeza.anterior = self.cola
+                else:
+                    actual.anterior.siguiente = actual.siguiente
+                    actual.siguiente.anterior = actual.anterior
+                return
+
+            actual = actual.siguiente
+
+            if actual == self.cabeza:
+                break

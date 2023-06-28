@@ -7,7 +7,7 @@ class Usuario:
             self._telefono = telefono
             self._correo = correo
             self._contrasena = contrasena
-            self._historial = historial if historial is not None else None
+            self._historial = historial if historial is not None else []
             self._peliFav = peliFav if peliFav is not None else None
 
         def set_rol(self, rol):

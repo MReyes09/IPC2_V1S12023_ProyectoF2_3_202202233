@@ -125,6 +125,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'home/static'),
     os.path.join(BASE_DIR, 'gestionar_usuarios/static'),
+    os.path.join(BASE_DIR, 'gestionar_categorias/static'),
 )
 
 # Default primary key field type
