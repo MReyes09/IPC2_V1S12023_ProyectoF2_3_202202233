@@ -9,14 +9,15 @@ from gestionar_categorias.estructura_lista.categoriaCotroller import categoriaCo
 # Create your views here.
 # https://mdbootstrap.com/docs/standard/forms/overview/ CSS CHILERo
 # https://bootsnipp.com/forms
-listaCategorias = getListaCategoria()
 categoriaControl = categoriaController()
 
 listaUsuarios: ListaUser = ListaUser()
 listaUsuarios = getListaUsers()
 
 def Home(request):
-    global listaCategorias
+    
+    listaCategorias = getListaCategoria()
+    global listaUsuarios
     
     if request.method == 'POST':
 
@@ -36,7 +37,7 @@ def Home(request):
                 elif usuario.get_rol() == "administrador":
                     messages.success(request, 'Sesión iniciada correctamente!!!')
                     setListaUsers(listaUsuarios)
-                    return redirect('userHome')
+                    return redirect('userAdmin')
             else:
                 messages.warning(request, 'No se encontró ninguna coincidencia.')
 
