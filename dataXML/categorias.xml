@@ -1,6 +1,7 @@
+<?xml version="1.0" ?>
 <categorias>
    <categoria>
-      <nombre>Acción</nombre>
+      <nombre>Accion</nombre>
       <peliculas>
          <pelicula>
             <titulo>Avengers: Endgame</titulo>
@@ -8,7 +9,7 @@
             <anio>2019</anio>
             <fecha>2023-06-05</fecha>
             <hora>18:30</hora>
-            <imagen>https://images.wallpapersden.com/image/download/2019-avengers-endgame-movie_a2loaGaUmZqaraWkpJRmbmllrWdoZ2U.jpg</imagen>
+            <imagen>https://images.wallpapersden.com/image/download/2019-avengers-endgame-movie_a2loaGaUmZqaraWkpJRmbmllrWdoZ2U.jpg	</imagen>
             <precio>42</precio>
          </pelicula>
          <pelicula>
@@ -21,7 +22,7 @@
             <precio>45</precio>
          </pelicula>
          <pelicula>
-            <titulo>Misión Imposible: Fallout</titulo>
+            <titulo>Mision Imposible: Fallout</titulo>
             <director>Christopher McQuarrie</director>
             <anio>2018</anio>
             <fecha>2023-06-07</fecha>
@@ -48,8 +49,8 @@
             <director>Greg Mottola</director>
             <anio>2007</anio>
             <fecha>2023-06-06</fecha>
-            <imagen>http://image.tmdb.org/t/p/w500/ek8e8txUyUwd2BNqj6lFEerJfbq.jpg</imagen>
             <hora>21:00</hora>
+            <imagen>http://image.tmdb.org/t/p/w500/ek8e8txUyUwd2BNqj6lFEerJfbq.jpg</imagen>
             <precio>42</precio>
          </pelicula>
          <pelicula>
