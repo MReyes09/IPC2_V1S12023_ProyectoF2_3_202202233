@@ -112,7 +112,7 @@
 
                     {% for sala in cine.get_salas %}
 
-                        <option value="{{ sala.get_numero }}">{{ sala.get_numero }}</option>
+                        <option value="{{ sala.get_numero }}">{{ sala.get_numero }} {{ cine.get_nombre }}</option>
 
                     {% endfor %}
 

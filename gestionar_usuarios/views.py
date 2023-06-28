@@ -9,10 +9,13 @@ from gestionar_categorias.estructura_lista.lista_Pelicula import ListaPelicula
 from gestionar_categorias.modelos.peliculas import Pelicula
 from gestionar_categorias.modelos.categoria import Categoria
 from gestionar_categorias.modelos.Sala import Sala
+from gestionar_categorias.modelos.Cine import Cine
 from gestionar_categorias.estructura_lista.CineController import CineController
 from gestionar_usuarios.estructura_lista.ListaTarjeta import ListaTarjeta
 from gestionar_usuarios.estructura_lista.HistorialController import HistorialController
 from gestionar_categorias.estructura_lista.categoriaCotroller import categoriaController
+
+import requests
 
 #CONTROLADORES
 cineControl = CineController()
@@ -187,7 +190,21 @@ def menuAdminCliente(request):
                 
                 lista.CargarXML()
                 lista.add_Admin()
-                messages.success(request, 'XML de usuarios cargado exitosamente!')
+                response = requests.get('http://192.168.0.12:5007/get_Usuarios')
+                usuarios_API = response.json()['usuario']
+                
+                for usuario in usuarios_API:
+                    rol = usuario['rol']
+                    nombre = usuario['nombre']
+                    apellido = usuario['apellido']
+                    telefono = int(usuario['telefono'])
+                    correo = usuario['correo']
+                    contrasena = usuario['contrasena']
+
+                    user_New:Usuario = Usuario(rol, nombre, apellido, telefono, correo, contrasena)
+                    lista.add_User(user_New)
+
+                messages.success(request, 'XML y API de usuarios cargado exitosamente!')
             
             elif cargar_XML_U == "2":
 
@@ -210,9 +227,32 @@ def menuAdminCliente(request):
                 listaCategorias = []
                 setListaCategoria(listaCategorias)
                 listaCategorias = categoriaControl.CargarXML_Category()
+
+                response = requests.get('http://192.168.0.12:5007/get_Peliculas')
+                categorias_API = response.json()
+
+                for categoria in categorias_API['categoria']:
+                    nombreCa:str = categoria['nombre']
+                    categoriaControl.agregar_Categoria(nombreCa)
+
+                    peliculas = categoria['peliculas']['pelicula']
+
+                    for pelicula in peliculas:
+
+                        titulo:str = pelicula['titulo']
+                        director:str = pelicula['director']
+                        anio:int = int(pelicula['anio'])
+                        fecha:str = pelicula['fecha']
+                        hora:str = pelicula['hora']
+                        imagen:str = pelicula['imagen']
+                        precio:int = int(pelicula['precio'])
+
+                        pelicula_New:Pelicula = Pelicula(titulo, director, anio, fecha, hora, imagen, precio)
+                        categoriaControl.agregar_Pelicula(nombreCa, pelicula_New)
+
+
                 setListaCategoria(listaCategorias)
-                print(f"lista: {getListaCategoria()}")
-                messages.success(request, 'XML de categorias y peliculas cargado exitosamente')
+                messages.success(request, 'XML y API de categorias y peliculas cargado exitosamente')
 
             elif cargar_XML_U == "2":
 
@@ -256,10 +296,31 @@ def menuAdminCliente(request):
             if cargar_XML_U == "1":
 
                 cineControl.CargarXML_Cine()
+                
+                response = requests.get('http://192.168.0.12:5007/get_Cine')
+                cines_API = response.json()
+
+                for cine in cines_API['cine']:
+
+                    nombre = cine['nombre']
+                    cineControl.agregar_Cine(nombre)
+
+                    salas = cine['salas']['sala']
+
+                    for sala in salas:
+
+                        numero = sala['numero']
+                        asientos = sala['asientos']
+
+                        sala_new:Sala = Sala(numero, asientos)
+
+                        cineControl.modificar_Cine(nombre, None, sala_new, None, 2)
+                
                 lista_Cines = cineControl.get_Lista_Cines()
+
                 setListaCine(lista_Cines)
 
-                messages.success(request, 'XML de cines y salas cargado exitosamente')
+                messages.success(request, 'XML y API de cines y salas cargado exitosamente')
 
             elif cargar_XML_U == "2":
 
@@ -300,7 +361,20 @@ def menuAdminCliente(request):
             if cargar_XML_U == "1":
 
                 lista_Tarjetas.CargarXML_Tarjeta()
-                messages.success(request, 'XML de las tarjetas se han cargado exitosamente!')
+
+                response = requests.get('http://192.168.0.12:5007/get_Tarjeta')
+                tarjetas_API = response.json()
+
+                for tarjeta in tarjetas_API['tarjeta']:
+                    tipo = tarjeta['tipo']
+                    numero:int = int(tarjeta['numero'])
+                    titular = tarjeta['titular']
+                    fecha_Expiracion:str = str(tarjeta['fecha_expiracion'])
+
+                    new_Tarjeta:Tarjeta = Tarjeta(tipo, numero, titular, fecha_Expiracion)
+                    lista_Tarjetas.add_Sala(new_Tarjeta)
+
+                messages.success(request, 'XML y API de las tarjetas se han cargado exitosamente!')
 
             if cargar_XML_U == "2":
 
